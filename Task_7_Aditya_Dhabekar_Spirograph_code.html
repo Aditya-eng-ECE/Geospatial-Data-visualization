@@ -1,0 +1,45 @@
+Task 7 README
+Submitted by - Aditya Kamlesh Dhabekar
+
+HTML Code -
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spirograph curve</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 2px solid #888888; margin: 4px; padding: 4px;" width="700" height="700"></canvas>
+    <pre id="con" style="width: 40%; border: 1px solid #888888; margin: 2px; padding: 2px;"></pre>
+    
+    <script>
+        function print(message) {
+            var term = document.getElementById('con');
+            term.innerHTML += message + "\n";
+        }
+
+        (function drawSpiro() {
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                var contex = canvas.getContext('2d');
+
+                contex.beginPath();
+
+                var R = 90, r = 36, a = 44; // Values of R, r, a as provided in the HW description.
+                var xi = R + r - a, yi = 0;
+                contex.moveTo(-118.2854617755649 + 0.00001 * xi, 34.02061335732313 + 0.00001 * yi);
+
+                var cos = Math.cos, sin = Math.sin, pi = Math.PI, numRevolutions = 10;
+                for (var t = 0.00; t < (pi * numRevolutions); t += 0.01) {
+                    var x = (R + r) * cos((r / R) * t) - a * cos((1 + r / R) * t);
+                    var y = (R + r) * sin((r / R) * t) - a * sin((1 + r / R) * t);
+                    var x1 = -118.2854617755649 + 0.00001 * x, y1 = 34.02061335732313 + 0.00001 * y;
+                    contex.lineTo(x1, y1);
+                    print(x1 + "," + y1);
+                }
+                contex.stroke();
+            }
+        })(); 
+    </script>
+</body>
+</html>
